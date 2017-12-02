@@ -1,0 +1,25 @@
+{
+    "name": "group37",
+    "version": "1.0.0",
+    "description": "group37",
+    "main": "app.js",
+    "scripts": {
+        "start": "sudo /home/group37/node-v8.9.1-linux-x64/bin/node app.js"
+    },
+    "keywords": [
+        "group37"
+    ],
+    "author": "Gan Wenyao",
+    "license": "Apache-2.0",
+    "dependencies": {
+        "koa": "latest",
+        "koa-bodyparser": "latest",
+        "koa-router": "latest",
+        "nunjucks": "latest",
+        "mime": "latest",
+        "mz": "latest",
+        "sequelize": "latest",
+        "mysql2": "latest",
+        "nodemailer": "latest"
+    }
+}

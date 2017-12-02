@@ -1,0 +1,13 @@
+mysqladmin -u root -p create group37
+
+grant all privileges on group37.* to 'gwy'@'%' identified by 'gwy';
+
+use group37;
+
+create table users (
+    email varchar(100) not null,
+    passwd varchar(100) not null,
+    code varchar(100) not null,
+    faceID bigint not null,
+    primary key (email)
+) engine=innodb;

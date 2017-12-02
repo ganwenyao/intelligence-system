@@ -1,0 +1,198 @@
+{% extends "base.html" %} {% block main %}
+<div class="container">
+    <div class="row">
+            <div class="col-md-12">
+                <h1 id = "failed">{{ failed }}</h1>
+                <div class="alert alert-danger"> <strong>抱歉!</strong> {{ message }}
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <h1 id = "camera"></h1>
+        <div class="col-md-6">
+            <div class="panel panel-default" id="signin" style="display:block;">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><span class="glyphicon glyphicon-user"></span>用户登录</h3>
+                </div>
+                <div class="panel-body">
+                    <form action="/signin" method="post" onsubmit="return checkSigninRegisterForm()">
+                        <div class="form-group">
+                            <label>邮箱地址</label>
+                            <input type="email" name="email" id="signinEmail" class="form-control" placeholder="Email">
+                            <p class="help-block" id = "signinHelpEmail">邮箱格式: xxx@xxx.com</p>
+                        </div>
+                        <div class="form-group">
+                            <label>密码</label>
+                            <input type="password" name="password" id="password" class="form-control" placeholder="Password">
+                            <p class="help-block" id = "signinHelpPasswd"></p>
+                        </div>
+                        <button type="submit" class="btn btn-primary">登录</button>
+                        <button type="reset" class="btn btn-primary">重置</button>
+                        <button style="visibility: hidden;" class="btn btn-primary">空隙空隙空隙</button>
+                        <button type="button" class="btn btn-primary" id="signupButton">切换到注册</button>
+                    </form>
+                </div>
+            </div>
+            <div class="panel panel-default" id="signup" style="display:none;">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><span class="glyphicon glyphicon-user"></span>用户注册</h3>
+                </div>
+                <div class="panel-body">
+                    <form action="/signup" method="post" onsubmit="return checkSignupRegisterForm()">
+                        <div class="form-group">
+                            <label>邮箱地址</label>
+                            <input type="email" name="email" id="signupEmail" class="form-control" placeholder="Email">
+                            <p class="help-block" id = "signupHelpEmail">邮箱格式: xxx@xxx.com</p>
+                        </div>
+                        <div class="form-group">
+                            <label>密码</label>
+                            <input type="password" name="password" id="password1" class="form-control" placeholder="Password">
+                            <p class="help-block" id = "signupHelpPasswd1"></p>
+                        </div>
+                        <div class="form-group">
+                                <label>重复密码</label>
+                                <input type="password" id="password2" class="form-control" placeholder="Password">
+                                <p class="help-block" id = "signupHelpPasswd2"></p>
+                        </div>
+                        <div class="form-group">
+                            <label>字符识别密码</label>
+                            <input type="text" name="text" id="signupText" class="form-control" placeholder="text">
+                            <p class="help-block" id = "textHelp"></p>
+                        </div>
+                        <button type="submit" class="btn btn-primary">注册</button>
+                        <button type="reset" class="btn btn-primary">重置</button>
+                        <button style="visibility: hidden;" class="btn btn-primary">空隙空隙空隙</button>
+                        <button type="button" class="btn btn-primary" id="signinButton">切换到登录</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><span class="glyphicon glyphicon-hd-video"></span>How to use the system</h3>
+                </div>
+                <div class="panel-body">
+                    <video width="100%" controls="controls">
+                        <source src="">
+                    </video>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- <div class="row">
+        <div class="col-md-12">
+            <h1>Get more courses...</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">JavaScript</h3>
+                </div>
+                <div class="panel-body">
+                    <p>full-stack JavaScript course</p>
+                    <p><a target="_blank" href="http://www.liaoxuefeng.com/wiki/001434446689867b27157e896e74d51a89c25cc8b43bdb3000">Read more</a></p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Python</h3>
+                </div>
+                <div class="panel-body">
+                    <p>the latest Python course</p>
+                    <p><a target="_blank" href="http://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000">Read more</a></p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">git</h3>
+                </div>
+                <div class="panel-body">
+                    <p>A course about git version control</p>
+                    <p><a target="_blank" href="http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000">Read more</a></p>
+                </div>
+            </div>
+        </div>
+    </div> -->
+</div>
+<script>
+    if ($('#failed').get(0).innerText == "注册失败!") {
+        $('#signin').get(0).style.display = 'none';
+        $('#signup').get(0).style.display = 'block';
+    } 
+    if ($('#failed').get(0).innerText == "登录失败!") {
+        $('#signin').get(0).style.display = 'block';
+        $('#signup').get(0).style.display = 'none';
+    } 
+    sp = $('#signupButton').get(0);
+    si = $('#signinButton').get(0);
+    sp.addEventListener('click', () => {
+        $('#signin').get(0).style.display = 'none';
+        $('#signup').get(0).style.display = 'block';
+});
+    si.addEventListener('click', () => {
+        $('#signin').get(0).style.display = 'block';
+        $('#signup').get(0).style.display = 'none';
+    });
+    function checkSigninRegisterForm() {
+        
+        let check_bool = true;
+        let signinEmail = $('#signinEmail');
+        let password = $('#password');
+        console.log(signinEmail.val());
+        console.log(password.val());
+        if (!signinEmail.val()) {
+            $('#signinHelpEmail').get(0).innerText = "邮箱地址为空!";
+            check_bool = false;
+        } else {
+            $('#signinHelpEmail').get(0).innerText = "邮箱格式: xxx@xxx.com";
+        }
+        if (!password.val()) {
+            $('#signinHelpPasswd').get(0).innerText = "密码为空!";
+            check_bool = false;
+        } else {
+            $('#signinHelpPasswd').get(0).innerText = "";
+        }
+        return check_bool;  
+    }
+    function checkSignupRegisterForm() {
+        let check_bool = true;
+        let signupEmail = $('#signupEmail');
+        let password1 = $('#password1');
+        let password2 = $('#password2');
+        let signupText = $('#signupText');
+        if (!signupEmail.val()) {
+            $('#signupHelpEmail').get(0).innerText = "邮箱地址为空!";
+            check_bool = false;
+        } else {
+            $('#signupHelpEmail').get(0).innerText = "邮箱格式: xxx@xxx.com";
+        }
+        if (!password1.val()) {
+            $('#signupHelpPasswd1').get(0).innerText = "密码为空!";
+            check_bool = false;
+        } else {
+            $('#signupHelpPasswd1').get(0).innerText = "";
+        }
+        if (password1.val() != password2.val()) {
+            $('#signupHelpPasswd2').get(0).innerText = "两次密码不相同!";
+            check_bool = false;
+        } else {
+            $('#signupHelpPasswd2').get(0).innerText = "";
+        }
+        if (!signupText.val()) {
+            $('#textHelp').get(0).innerText = "字符识别密码为空!";
+            check_bool = false;
+        } else {
+            $('#textHelp').get(0).innerText = "";
+        }
+        $('#camera').get(0).innerText = "请在摄像机前录入人脸信息!( •̀ .̫ •́ )✧";
+        return check_bool;
+    }
+</script>
+{% endblock %}
